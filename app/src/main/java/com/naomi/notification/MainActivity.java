@@ -3,6 +3,8 @@ package com.naomi.notification;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -42,11 +44,18 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent actionIntent = PendingIntent.getBroadcast(this,
                 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.kitty);
+
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_one)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setLargeIcon(largeIcon)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(getString(R.string.long_text))
+                        .setBigContentTitle("Big Content Title")
+                        .setSummaryText("Summary Text"))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setColor(Color.BLUE)
@@ -66,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
                 .setSmallIcon(R.drawable.ic_two)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setStyle(new NotificationCompat.InboxStyle()
+                        .addLine("This is line 1")
+                        .addLine("This is line 2")
+                        .addLine("This is line 3")
+                        .addLine("This is line 4")
+                        .addLine("This is line 5")
+                        .addLine("This is line 6")
+                        .addLine("This is line 7")
+                        .setBigContentTitle("Big Content Title")
+                        .setSummaryText("Summary Text"))
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .build();
 
